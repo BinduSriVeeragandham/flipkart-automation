@@ -53,5 +53,13 @@ Scenario: Verify Flipkart title on product page
   When User searches for "iphone"
   And User clicks first product
   Then Page title should contain Flipkart
+  
+Scenario: Verify product page opens for another search
+
+  Given User launches Flipkart
+  When User searches for "samsung mobile"
+  And User clicks first product
+  Then Product details page should open
+
 
 

@@ -18,3 +18,11 @@ Scenario: Verify homepage URL
 Scenario: Verify search box placeholder
   Given User launches Flipkart
   Then Search placeholder should be visible
+
+Scenario: Verify homepage navigation after category visit
+
+  Given User launches Flipkart
+  When User navigates to mobiles category
+  And User clicks Flipkart logo
+  Then User should be on home page
+

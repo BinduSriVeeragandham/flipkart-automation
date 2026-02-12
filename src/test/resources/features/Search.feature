@@ -30,4 +30,11 @@ Scenario: Verify search page URL exists
   Given User launches Flipkart
   When User searches for "iphone"
   Then Search results URL should exist
+  
+Scenario: Verify search works for laptops
+
+  Given User launches Flipkart
+  When User searches for "laptop"
+  Then Search results should be displayed
+
 
