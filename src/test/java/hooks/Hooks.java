@@ -1,6 +1,7 @@
 package hooks;
 
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
 import org.openqa.selenium.OutputType;
@@ -14,11 +15,18 @@ import org.apache.commons.io.FileUtils;
 
 public class Hooks {
 
-    WebDriver driver = DriverSetup.getDriver();
+    WebDriver driver;
+
+    @Before
+    public void setUp() {
+
+        driver = DriverSetup.getDriver();
+    }
 
     @After
-    public void captureScreenshot(Scenario scenario) {
+    public void tearDown(Scenario scenario) {
 
+        // Screenshot if failed
         if (scenario.isFailed()) {
 
             try {
@@ -26,15 +34,17 @@ public class Hooks {
                         .getScreenshotAs(OutputType.FILE);
 
                 File dest = new File(
-                    "target/screenshots/"
-                    + scenario.getName() + ".png");
+                        "target/screenshots/"
+                        + scenario.getName() + ".png");
 
                 FileUtils.copyFile(src, dest);
 
             } catch (Exception e) {
-                System.out.println(
-                    "Screenshot capture failed");
+                System.out.println("Screenshot failed");
             }
         }
+
+        // 🔴 CRITICAL — Close driver after every scenario
+        DriverSetup.quitDriver();
     }
 }

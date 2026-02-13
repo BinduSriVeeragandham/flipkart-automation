@@ -17,21 +17,24 @@ public class DriverSetup {
             WebDriverManager.chromedriver().setup();
 
             ChromeOptions options = new ChromeOptions();
-
-            // ===== HEADLESS MODE =====
             options.addArguments("--headless=new");
-
-            // ===== Stability arguments =====
             options.addArguments("--disable-gpu");
             options.addArguments("--window-size=1920,1080");
             options.addArguments("--disable-notifications");
             options.addArguments("--disable-infobars");
 
             driver = new ChromeDriver(options);
-
             driver.manage().window().maximize();
         }
 
         return driver;
+    }
+
+    public static void quitDriver() {
+
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
     }
 }
